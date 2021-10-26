@@ -34,10 +34,36 @@ end
 Language.delete_all
 languages = ["Ruby", "PHP", "Golang", "Python", "React Native", "React JS", "Vuejs", "Nodejs"]
 arr = []
-languages.times do |language|
+languages.each do |language|
   arr << {
     language: language,
-    description: Faker::Lorem.paragraphs
+    description: Faker::Lorem.paragraphs[0]
   }
 end
 Language.import arr, validate: true
+
+# Create data table levels
+Level.delete_all
+levels = ["Intern", "Fresher", "Junior", "Middle", "Senior", "Leader", "Brse", "Comtor", "Manager", "Freelancer"]
+arr = []
+levels.each do |level|
+  arr << {
+    level: level,
+    description: Faker::Lorem.paragraphs[0]
+  }
+end
+Level.import arr, validate: true
+
+# Create data table positions
+Position.delete_all
+positions = ["Web Developer", "Mobile Developer", "HR Recruitment", "Backend Developer", "Frontend Developer", "Fullstack Developer"]
+arr = []
+positions.each do |position|
+  arr << {
+    position: position,
+    description: Faker::Lorem.paragraphs[0]
+  }
+end
+Position.import arr, validate: true
+
+
