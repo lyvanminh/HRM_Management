@@ -39,6 +39,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  # Combine 'pry' with 'byebug'. Adds 'step', 'next', 'finish', 'continue' and 'break' commands to control execution.
+  gem 'pry-byebug'
+
+  # Use Pry as your rails console
+  gem 'pry-rails'
 end
 
 group :development do
@@ -60,6 +66,21 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Flexible authentication solution for Rails with Warden
 gem 'devise'
+
+# Doorkeeper is an OAuth 2 provider for Rails and Grape.
 gem 'doorkeeper'
-gem 'pry'
+
+# ActiveModel::Serializers allows you to generate your JSON in an object-oriented and convention-driven manner.
+gem 'active_model_serializers', '~> 0.10.10'
+
+# Pagy is the ultimate pagination gem that outperforms the others in each and every benchmark and comparison.
+gem 'pagy'
+
+# This gem is a port of Perl's Data::Faker library that generates fake data.
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+# Rack::Cors provides support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications.
+gem 'rack-cors'

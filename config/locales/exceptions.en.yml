@@ -1,0 +1,5 @@
+en:
+  exceptions:
+    AuthenticationError: "AuthenticationError"
+    MissingParamsError: "MissingParamsError"
+    InvalidParamsError: "InvalidParamsError"
