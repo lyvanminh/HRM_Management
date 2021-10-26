@@ -76,11 +76,11 @@ gem 'doorkeeper'
 # ActiveModel::Serializers allows you to generate your JSON in an object-oriented and convention-driven manner.
 gem 'active_model_serializers', '~> 0.10.10'
 
-# Pagy is the ultimate pagination gem that outperforms the others in each and every benchmark and comparison.
-gem 'pagy'
-
 # This gem is a port of Perl's Data::Faker library that generates fake data.
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 # Rack::Cors provides support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications.
 gem 'rack-cors'
+
+# Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 3+
+gem 'kaminari', '~> 0.16.3'

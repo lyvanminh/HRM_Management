@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
-      # TODO: routes
+      use_doorkeeper do
+        controllers tokens: 'tokens'
+        skip_controllers :authorizations, :applications,
+                         :authorized_applications
+      end
     end
   end
 end
