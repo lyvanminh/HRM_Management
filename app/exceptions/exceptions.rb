@@ -61,7 +61,9 @@ module Exceptions
           details: exception.record.errors.messages
         }
       }
-    when AuthenticationError
+    when Doorkeeper::Errors::TokenExpired, Doorkeeper::Errors::TokenUnknown,
+      Doorkeeper::Errors::TokenForbidden, Doorkeeper::Errors::TokenRevoked,
+      AuthenticationError
       {
         status: 401,
         error: {

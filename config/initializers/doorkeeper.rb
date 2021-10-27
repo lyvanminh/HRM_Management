@@ -11,6 +11,7 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
+    current_user || warden.authenticate!(scope: :user)
   end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
@@ -245,7 +246,7 @@ Doorkeeper.configure do
   # not in configuration, i.e. +default_scopes+ or +optional_scopes+.
   # (disabled by default)
   #
-  # enforce_configured_scopes
+  enforce_configured_scopes
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then
@@ -310,7 +311,7 @@ Doorkeeper.configure do
   #   Doorkeeper::Errors::TokenForbidden, Doorkeeper::Errors::TokenExpired,
   #   Doorkeeper::Errors::TokenRevoked, Doorkeeper::Errors::TokenUnknown
   #
-  # handle_auth_errors :raise
+  handle_auth_errors :raise
 
   # Customize token introspection response.
   # Allows to add your own fields to default one that are required by the OAuth spec
@@ -347,6 +348,10 @@ Doorkeeper.configure do
   #   https://datatracker.ietf.org/doc/html/rfc6819#section-4.4.3
   #
   grant_flows %w(password)
+
+  resource_owner_from_credentials do |routes|
+    User.authenticate(params[:email], params[:password])
+  end
 
   # Allows to customize OAuth grant flows that +each+ application support.
   # You can configure a custom block (or use a class respond to `#call`) that must

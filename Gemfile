@@ -86,3 +86,4 @@ gem 'rack-cors'
 gem 'kaminari', '~> 0.16.3'
 gem "paranoia"
 gem "activerecord-import"
+gem 'telephone_number'

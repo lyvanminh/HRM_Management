@@ -1,7 +1,8 @@
 class Api::V1::ApiController < ApplicationController
   rescue_from StandardError, with: :render_error
 
-  # before_action :doorkeeper_authorize!
+  before_action :doorkeeper_authorize!
+  skip_before_action :verify_authenticity_token
 
   private
 

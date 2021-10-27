@@ -14,9 +14,24 @@ class User < ApplicationRecord
            foreign_key: :resource_owner_id,
            dependent: :delete_all # or :destroy if you need callbacks
 
-  belongs_to :role
+  belongs_to :role, optional: true
   has_many :candidates, foreign_key: :user_refferal_id, class_name: 'Candidate', dependent: :destroy
   has_many :participants, as: :participantable
   has_many :requests, foreign_key: :sender_id, class_name: 'Request', dependent: :destroy
   has_many :evaluates
+
+  validates :email, format: { with: /\A[a-zA-Z0-9.!\#$%&'*+\/=?^_`{|}~-]+@asia.com\z/ }, uniqueness: { scope: :email }
+  validates :name, presence: true
+  validates :phone_number, telephone_number: { country: :vn, types: %i[mobile] }
+  validates :birthday, presence: true
+
+  class << self
+    def authenticate(email, password)
+      user = User.find_for_authentication(email: email)
+
+      raise(Exceptions::AuthenticationError) unless user.try(:valid_password?, password)
+
+      user
+    end
+  end
 end

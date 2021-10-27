@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       end
 
       resources :recruitment_requests
+      resources :users, only: :create
     end
   end
 end
