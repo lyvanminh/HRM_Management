@@ -4,7 +4,7 @@ class CreateEvaluates < ActiveRecord::Migration[5.2]
       t.integer :user_id, null: false
       t.text :content, null: false
       t.integer :request_id, null: false
-      t.integer :status, null: false, default: 0
+      t.integer :status, default: 0
       t.datetime :deleted_at
 
       t.timestamps null: false
