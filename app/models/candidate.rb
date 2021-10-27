@@ -5,6 +5,6 @@ class Candidate < ApplicationRecord
   belongs_to :level
   belongs_to :position
   belongs_to :language
-  belongs_to :user
+  belongs_to :user, foreign_key: :user_refferal_id, class_name: 'User'
   has_many :participants, as: :participantable
 end

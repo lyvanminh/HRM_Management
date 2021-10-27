@@ -3,3 +3,4 @@ en:
     AuthenticationError: "AuthenticationError"
     MissingParamsError: "MissingParamsError"
     InvalidParamsError: "InvalidParamsError"
+    RecordNotFound: "RecordNotFound"

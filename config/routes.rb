@@ -13,6 +13,8 @@ Rails.application.routes.draw do
         skip_controllers :authorizations, :applications,
                          :authorized_applications
       end
+
+      resources :recruitment_requests
     end
   end
 end
