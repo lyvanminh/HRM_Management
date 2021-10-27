@@ -30,6 +30,19 @@ module Exceptions
     end
   end
 
+  class CustomValidate < StandardError
+    attr_reader :model, :error
+
+    def initialize(model, error)
+      @model = model
+      @error = error
+    end
+
+    def message
+      I18n.t("errors.#{model.class.name.downcase.pluralize}.#{error}")
+    end
+  end
+
   class AuthenticationError < CustomException; end
 
   class MissingParamsError < ParamsException; end

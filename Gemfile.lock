@@ -98,7 +98,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    doorkeeper (5.5.4)
+    doorkeeper (5.4.0)
       railties (>= 5)
     erubi (1.10.0)
     execjs (2.8.1)
@@ -250,7 +250,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
-  doorkeeper
+  doorkeeper (= 5.4.0)
   faker!
   jbuilder (~> 2.5)
   kaminari (~> 0.16.3)
