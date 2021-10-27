@@ -84,3 +84,5 @@ gem 'rack-cors'
 
 # Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 3+
 gem 'kaminari', '~> 0.16.3'
+gem "paranoia"
+gem "activerecord-import"
