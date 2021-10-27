@@ -1,6 +1,8 @@
 class Api::V1::ApiController < ApplicationController
   rescue_from StandardError, with: :render_error
 
+  # before_action :doorkeeper_authorize!
+
   private
 
   def render_success(data, options = {})
@@ -23,6 +25,16 @@ class Api::V1::ApiController < ApplicationController
       total_pages: data.total_pages,
       current_page: data.current_page,
     }
+    render json: json
+  end
+
+  def render_all_data_success(data, options = {})
+    serializable_resource = ActiveModelSerializers::SerializableResource.new(data, options)
+    json = {
+      success: true,
+      items: serializable_resource.as_json
+    }
+
     render json: json
   end
 
