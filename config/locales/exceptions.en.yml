@@ -4,3 +4,6 @@ en:
     MissingParamsError: "MissingParamsError"
     InvalidParamsError: "InvalidParamsError"
     RecordNotFound: "RecordNotFound"
+  errors:
+    users:
+      email_or_password_wrong: "Wrong email or password. Try again"

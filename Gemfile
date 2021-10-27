@@ -71,7 +71,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 # Doorkeeper is an OAuth 2 provider for Rails and Grape.
-gem 'doorkeeper'
+gem 'doorkeeper', '5.4.0'
 
 # ActiveModel::Serializers allows you to generate your JSON in an object-oriented and convention-driven manner.
 gem 'active_model_serializers', '~> 0.10.10'

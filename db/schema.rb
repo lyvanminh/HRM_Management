@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_055002) do
+ActiveRecord::Schema.define(version: 2021_10_27_155518) do
 
   create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "user_name", null: false
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_055002) do
 
   create_table "oauth_access_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.bigint "resource_owner_id"
-    t.bigint "application_id", null: false
+    t.bigint "application_id"
     t.string "token", null: false
     t.string "refresh_token"
     t.integer "expires_in"

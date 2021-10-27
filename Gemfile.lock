@@ -1267,7 +1267,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    doorkeeper (5.5.4)
+    doorkeeper (5.4.0)
       railties (>= 5)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
