@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_162912) do
+ActiveRecord::Schema.define(version: 2021_10_27_055002) do
 
   create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "user_name", null: false
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 2021_10_26_162912) do
   end
 
   create_table "criterias", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.integer "type", default: 0, null: false
+    t.integer "type", default: 0
     t.string "content", default: "", null: false
-    t.integer "max_point", default: 5, null: false
+    t.integer "max_point", default: 5
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -54,17 +54,18 @@ ActiveRecord::Schema.define(version: 2021_10_26_162912) do
     t.integer "user_id", null: false
     t.text "content", null: false
     t.integer "request_id", null: false
-    t.integer "status", default: 0, null: false
+    t.integer "status", default: 0
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "candidate_id"
     t.index ["deleted_at"], name: "index_evaluates_on_deleted_at"
   end
 
   create_table "evaluation_points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "criteria_id", null: false
     t.integer "evaluate_id", null: false
-    t.integer "point", default: 0, null: false
+    t.integer "point", default: 0
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -133,7 +134,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_162912) do
 
   create_table "participants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "participantable_id", null: false
-    t.integer "participantable_type", null: false
+    t.string "participantable_type", null: false
     t.integer "schedule_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
@@ -157,16 +158,17 @@ ActiveRecord::Schema.define(version: 2021_10_26_162912) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "receive_user_id"
     t.index ["deleted_at"], name: "index_recruitments_on_deleted_at"
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "sender_id", null: false
-    t.integer "status", default: 0, null: false
+    t.integer "status", default: 0
     t.integer "requestable_id", null: false
-    t.integer "requestable_type", null: false
+    t.string "requestable_type", null: false
     t.integer "number", default: 1
-    t.integer "type", default: 0, null: false
+    t.integer "type_request", default: 0
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -184,7 +186,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_162912) do
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.datetime "start_time", null: false
     t.datetime "end_time", null: false
-    t.integer "round", default: 1, null: false
+    t.integer "round", default: 1
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
