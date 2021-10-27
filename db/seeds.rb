@@ -14,7 +14,7 @@ Role.import arr, validate: true
 User.delete_all
 roles = Role.all
 roles.each do |role|
-  User.create!(email: Faker::Internet.email,
+  User.create!(email: "test_email+#{role.id}@asia.com",
                name: Faker::Name.name,
                phone_number: "0336896191",
                birthday: Faker::Date.between(from: 40.years.ago, to: 20.years.ago),
@@ -99,7 +99,7 @@ language_ids = Language.all.pluck(:id)
 position_ids = Position.all.pluck(:id)
 role_ids = Role.where(role: ["HR Department", "CEO"]).pluck(:id)
 user_ids = User.where(role_id: role_ids).pluck(:id)
-5.times do |i|
+1.times do |i|
   Candidate.create!(user_name: Faker::Name,
                     birth_day: Faker::Date.between(from: 40.years.ago, to: 20.years.ago),
                     email: Faker::Internet.email,

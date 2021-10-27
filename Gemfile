@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -87,3 +87,8 @@ gem 'kaminari', '~> 0.16.3'
 gem "paranoia"
 gem "activerecord-import"
 gem 'telephone_number'
+gem "dotenv-rails"
+gem "config"
+gem "aws-sdk", "~> 3"
+gem "carrierwave", "~> 2.0"
+gem "carrierwave-aws"
