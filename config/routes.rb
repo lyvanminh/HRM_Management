@@ -14,8 +14,9 @@ Rails.application.routes.draw do
                          :authorized_applications
       end
 
-      resources :recruitment_requests
+      resources :requests
       resources :users, only: :create
+      resources :candidates, only: :create
     end
   end
 end

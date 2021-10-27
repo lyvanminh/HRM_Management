@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :participants, as: :participantable
   has_many :requests, foreign_key: :sender_id, class_name: 'Request', dependent: :destroy
   has_many :evaluates
+  has_many :recruitments, foreign_key: :receive_user_id, class_name: 'Recruitment', dependent: :destroy
+
 
   validates :email, format: { with: /\A[a-zA-Z0-9.!\#$%&'*+\/=?^_`{|}~-]+@asia.com\z/ }, uniqueness: { scope: :email }
   validates :name, presence: true

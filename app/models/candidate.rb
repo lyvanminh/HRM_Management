@@ -7,4 +7,6 @@ class Candidate < ApplicationRecord
   belongs_to :language
   belongs_to :user, foreign_key: :user_refferal_id, class_name: 'User'
   has_many :participants, as: :participantable
+
+  mount_uploader :content_cv, CvUploader
 end
