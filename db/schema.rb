@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_155518) do
+ActiveRecord::Schema.define(version: 2021_10_28_140938) do
 
   create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "user_name", null: false
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_155518) do
     t.string "name"
     t.string "phone_number", limit: 11
     t.date "birthday"
-    t.integer "role_id"
+    t.integer "role", default: 0
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true

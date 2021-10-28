@@ -1,12 +1,11 @@
 class Api::V1::RequestsController < Api::V1::ApiController
-  skip_before_action :verify_authenticity_token
+  before_action :find_request, only: :update
 
   def index
     page = params[:page] ? params[:page].to_i : 1
 
-    @requests = Request.get_recruitment_request
-    # render_pagination_success @requests, seach_serializer: RequestSerializer
-    render_all_data_success @requests, seach_serializer: RequestSerializer
+    @requests = Request.get_recruitment_request.page(page).per(NUMBER_PER_PAGE)
+    render_pagination_success @requests, seach_serializer: RequestSerializer
   end
 
   def create
@@ -24,6 +23,14 @@ class Api::V1::RequestsController < Api::V1::ApiController
     end
   end
 
+  def update
+    ActiveRecord::Base.transaction do
+      @request.update!(status: params[:status])
+
+      render_success @request, serializer: RequestSerializer
+    end
+  end
+
   private
 
   def request_params
@@ -32,5 +39,9 @@ class Api::V1::RequestsController < Api::V1::ApiController
 
   def recruitment_params
     params.permit(:receive_user_id, :level_id, :position_id, :language_id)
+  end
+
+  def find_request
+    @request = Request.find_by!(id: params[:id])
   end
 end

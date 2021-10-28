@@ -15,8 +15,14 @@ Rails.application.routes.draw do
       end
 
       resources :requests
-      resources :users, only: :create
-      resources :candidates, only: :create
+      resources :users, only: [:create, :edit, :update]
+      resources :candidates, only: [:create, :update]
+      resources :chanels, only: :index
+      resources :levels, only: :index
+      resources :languages, only: :index
+      resources :positions, only: :index
+      get "users/get"
+      post "users/set_role"
     end
   end
 end
