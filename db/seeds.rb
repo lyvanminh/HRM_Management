@@ -1,24 +1,10 @@
-# Create data table roles
-Role.delete_all
-roles = ["Manager", "HR Manager", "Sale Manager", "CEO", "HR Department", "Project Manager", "General Manager", "Technical Manager", "Project Leader", "Customer"]
-arr = []
-roles.each do |role|
-  arr << {
-    role: role
-  }
-end
-
-Role.import arr, validate: true
-
 # Create data table users
 User.delete_all
-roles = Role.all
-roles.each do |role|
+10.times do |i|
   User.create!(email: "test_email+#{role.id}@asia.com",
                name: Faker::Name.name,
                phone_number: "0336896191",
                birthday: Faker::Date.between(from: 40.years.ago, to: 20.years.ago),
-               role_id: role.id,
                password: "12345678")
 end
 
@@ -71,8 +57,7 @@ Chanel.import arr, validate: true
 
 # Create data table recruitments
 Recruitment.delete_all
-role = Role.find_by(role: "CEO")
-ceo = User.find_by(role_id: role.id)
+ceo = User.find_by(role: 8)
 level_ids = Level.all.pluck(:id)
 language_ids = Language.all.pluck(:id)
 position_ids = Position.all.pluck(:id)
@@ -83,8 +68,7 @@ end
 # Create data table requests (recruitment requests)
 Request.delete_all
 recruitments = Recruitment.all
-role = Role.find_by(role: "HR Department")
-hr_department = User.find_by(role_id: role.id)
+hr_department = User.find_by(role: 0)
 recruitments.each do |recruitment|
   Request.create!(sender_id: hr_department.id,
                   requestable_id: recruitment.id,
@@ -97,9 +81,9 @@ chanel_ids  = Chanel.all.pluck(:id)
 level_ids = Level.all.pluck(:id)
 language_ids = Language.all.pluck(:id)
 position_ids = Position.all.pluck(:id)
-role_ids = Role.where(role: ["HR Department", "CEO"]).pluck(:id)
-user_ids = User.where(role_id: role_ids).pluck(:id)
-1.times do |i|
+user_ids = User.all.pluck(:id)
+file = File.open("app/assets/images/example_cv.docx.pdf")
+10.times do |i|
   Candidate.create!(user_name: Faker::Name,
                     birth_day: Faker::Date.between(from: 40.years.ago, to: 20.years.ago),
                     email: Faker::Internet.email,
@@ -109,7 +93,7 @@ user_ids = User.where(role_id: role_ids).pluck(:id)
                     level_id: level_ids.sample,
                     language_id: language_ids.sample,
                     position_id: position_ids.sample,
-                    content_cv: "Thanh_Nguyen.pdf",
+                    content_cv: file,
                     user_refferal_id: user_ids.sample,
                     url_cv: "https://www.lipsum.com/")
 end

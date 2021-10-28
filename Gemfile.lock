@@ -1467,7 +1467,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   config
   devise
-  doorkeeper
+  doorkeeper (= 5.4.0)
   dotenv-rails
   faker!
   jbuilder (~> 2.5)
