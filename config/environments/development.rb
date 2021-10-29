@@ -63,9 +63,9 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = {
-    host: ENV["ACTION_MAILER_HOST"],
-    port: ENV["ACTION_MAILER_PORT"],
-    protocol: ENV["ACTION_MAILER_PROTOCOL"]
+    host: 'localhost',
+    port: '3000',
+    protocol: 'http'
   }
   config.action_mailer.delivery_method = :smtp
 
