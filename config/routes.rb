@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :positions, only: :index
       get "users/get"
       post "users/set_role"
+      post "candidates/format_cv"
     end
   end
 end
