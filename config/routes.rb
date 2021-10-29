@@ -14,6 +14,14 @@ Rails.application.routes.draw do
                          :authorized_applications
       end
 
+      namespace :oauth do
+        namespace :me do
+          post :forgot
+          post :reset
+          get :confirm_email
+        end
+      end
+
       resources :requests
       resources :users, only: [:create, :edit, :update]
       resources :candidates, only: [:create, :update]

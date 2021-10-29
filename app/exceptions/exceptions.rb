@@ -4,6 +4,7 @@ module Exceptions
     AuthenticationError: 1001,
     MissingParamsError: 1002,
     InvalidParamsError: 1003,
+    ConfirmationError: 1004
   }
 
   class CustomException < StandardError
@@ -48,6 +49,8 @@ module Exceptions
   class MissingParamsError < ParamsException; end
 
   class InvalidParamsError < ParamsException; end
+
+  class ConfirmationError < CustomException; end
 
   def to_json exception
     Rails.logger.error exception.class

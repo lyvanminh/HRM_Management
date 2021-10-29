@@ -4,6 +4,11 @@ en:
     MissingParamsError: "MissingParamsError"
     InvalidParamsError: "InvalidParamsError"
     RecordNotFound: "RecordNotFound"
+    ConfirmationError: "ConfirmationError"
+    errors:
+      token_not_present: "Token not present"
+      email_not_present: "Email not present"
+      link_invalid: "Link not valid or expired. Try generating a new link"
   errors:
     users:
       email_or_password_wrong: "Wrong email or password. Try again"
