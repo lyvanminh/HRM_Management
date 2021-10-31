@@ -108,3 +108,84 @@ contents = ["Evaluate for technical", "Evaluate for skill", "Evaluate for commun
   )
 end
 
+create interviews
+Interview.delete_all
+levels = Level.all
+levels.each do |level|
+  Interview.create(
+    level_id: level.id,
+    description: Faker::Lorem.paragraphs[0],
+    name: level.level
+  )
+end
+
+#create rounds
+Round.delete_all
+interviews = Interview.all
+interviews.each do |interview|
+  if interview.name == "Leader" || interview.name == "Brse" || interview.name == "Comtor" || interview.name == "Manager"
+    2.times do |i|
+      Round.create(interview_id: interview.id,
+                   name: interview.name + "Interview Round #{i+1}",
+                   description: Faker::Lorem.paragraphs[0],
+                   order: i+1)
+    end
+  else
+    Round.create(interview_id: interview.id,
+                 name: interview.name + "Interview Round 1",
+                 description: Faker::Lorem.paragraphs[0],
+                 order: 1)
+  end
+end
+
+#create interviewer
+Interviewer.delete_all
+interviews = Interview.all
+interviews.each do |interview|
+  if interview.name == "Junior" || interview.name == "Middle" || interview.name == "Senior"
+    2.times do |i|
+      a = ["project_manager", "technical_manager"]
+      Interviewer.create(
+        round_id: interview.rounds[0].id,
+        role: a[i],
+        amount: 1
+      )
+    end
+  elsif interview.name == "Leader" || interview.name == "Brse"
+    Interviewer.create(round_id: interview.rounds[0].id,
+                       role: "ceo",
+                       amount: 1
+                      )
+    if interview.name == "Leader"
+      2.times do |i|
+        a = ["project_manager", "hr_manager"]
+        Interviewer.create(
+          round_id: interview.rounds[1].id,
+          role: a[i],
+          amount: 1
+        )
+      end
+    else
+      Interviewer.create(round_id: interview.rounds[1].id,
+                         role: "general_manager",
+                         amount: 1
+      )
+    end
+  elsif interview.name == "Manager"
+    a = ["ceo", "hr_manager"]
+    a.each_with_index do |b, i|
+      Interviewer.create(round_id: interview.rounds[i].id,
+                         role: b,
+                         amount: 1
+      )
+    end
+
+  elsif interview.name == "Freelancer"
+    Interviewer.create(round_id: interview.rounds[0].id,
+                       role: "customer",
+                       amount: 1
+    )
+  end
+end
+
+
