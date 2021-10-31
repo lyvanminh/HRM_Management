@@ -98,3 +98,13 @@ file = File.open("app/assets/images/example_cv.docx.pdf")
                     url_cv: "https://www.lipsum.com/")
 end
 
+# Create criterias
+Criterias.delete_all
+contents = ["Evaluate for technical", "Evaluate for skill", "Evaluate for communicate", "Evaluate for attitude", "Evaluate other"]
+4.times do |i|
+  Criterias.create(
+    criteria_type: i,
+    content: contents[i]
+  )
+end
+

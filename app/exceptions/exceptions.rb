@@ -106,7 +106,7 @@ module Exceptions
       }
     else
       {
-        status: 500,
+        status: 499,
         error: {
           id: IDS[:Default],
           message: exception.message

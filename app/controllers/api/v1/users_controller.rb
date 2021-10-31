@@ -3,6 +3,11 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :find_user, only: [:edit, :update]
   before_action :is_ceo?, only: :set_role
 
+  def index
+    users = User.select(:id, :name)
+    render_all_data_success users, seach_serializer: UserSerializer
+  end
+
   def create
     user = User.create!(user_params)
     UserMailer.registration_confirmation(user).deliver

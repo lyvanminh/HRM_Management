@@ -23,12 +23,13 @@ Rails.application.routes.draw do
       end
 
       resources :requests
-      resources :users, only: [:create, :edit, :update]
-      resources :candidates, only: [:create, :update]
+      resources :users, only: [:create, :edit, :update, :index]
+      resources :candidates, only: [:create, :update, :index, :update]
       resources :chanels, only: :index
       resources :levels, only: :index
       resources :languages, only: :index
       resources :positions, only: :index
+      resources :evaluates
       get "users/get"
       post "users/set_role"
       post "candidates/format_cv"
