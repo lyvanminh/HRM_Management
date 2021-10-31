@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_042558) do
+ActiveRecord::Schema.define(version: 2021_10_31_132328) do
+
+  create_table "calendars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.integer "participan_id"
+    t.string "participan_type", null: false
+    t.datetime "date"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "time_array"
+  end
 
   create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "user_name", null: false
@@ -29,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_10_30_042558) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "interview_id"
     t.index ["deleted_at"], name: "index_candidates_on_deleted_at"
   end
 
@@ -70,6 +81,24 @@ ActiveRecord::Schema.define(version: 2021_10_30_042558) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_evaluation_points_on_deleted_at"
+  end
+
+  create_table "interviewers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "role", null: false
+    t.integer "round_id", null: false
+    t.integer "amount", default: 1, null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "interviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.integer "level_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "languages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
@@ -133,12 +162,11 @@ ActiveRecord::Schema.define(version: 2021_10_30_042558) do
   end
 
   create_table "participants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.integer "participantable_id", null: false
-    t.string "participantable_type", null: false
     t.integer "schedule_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["deleted_at"], name: "index_participants_on_deleted_at"
   end
 
@@ -183,13 +211,25 @@ ActiveRecord::Schema.define(version: 2021_10_30_042558) do
     t.index ["deleted_at"], name: "index_roles_on_deleted_at"
   end
 
-  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.datetime "start_time", null: false
-    t.datetime "end_time", null: false
-    t.integer "round", default: 1
+  create_table "rounds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.integer "interview_id", null: false
+    t.integer "duration", default: 30, null: false
+    t.integer "gap", default: 5, null: false
+    t.string "name", null: false
+    t.string "description", null: false
+    t.integer "order"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "round_id"
     t.index ["deleted_at"], name: "index_schedules_on_deleted_at"
   end
 

@@ -3,6 +3,7 @@ class Level < ApplicationRecord
 
   has_many :recruitments, dependent: :destroy
   has_many :candidates, dependent: :destroy
+  has_one :interview
 
   class << self
     def get_all
