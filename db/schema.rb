@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_043435) do
+ActiveRecord::Schema.define(version: 2021_10_30_042558) do
 
   create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "user_name", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_10_29_043435) do
   end
 
   create_table "criterias", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.integer "type", default: 0
+    t.integer "criteria_type", default: 0
     t.string "content", default: "", null: false
     t.integer "max_point", default: 5
     t.datetime "deleted_at"

@@ -92,3 +92,4 @@ gem "config"
 gem "aws-sdk", "~> 3"
 gem "carrierwave", "~> 2.0"
 gem "carrierwave-aws"
+gem 'pdf-reader'

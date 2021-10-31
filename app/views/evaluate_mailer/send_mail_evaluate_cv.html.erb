@@ -1,0 +1,33 @@
+<% if @type == "fail_cv" %>
+  Dear Mr./Ms <%= @candidate.user_name %>,
+
+  Thank you for your interest in the vacancy at Scuti JSC.
+  Currently, the Company has recruited enough for this position. We ask for your permission to keep in touch with you at this time.
+  The recruitment department will contact you as soon as the position reopens.
+  Hope we will have the opportunity to work together in the near future.
+  Wishing all the best to you!
+  <%= @user.name %>
+<% else %>
+  Dear Mr./Ms <%= @candidate.user_name %>,
+
+  Thank you for your application to Scuti company.
+  We are pleased to invite you to join the interview with details as below:
+  Time: 9 am, Wednesday 30th June, 2021
+  Venue: at room 2, 17 floor, no. 68 Nguyen Co Thach, My Dinh, Tu Liem, Ha Noi
+
+  If there is any urgency, feel free to contact Interviewer via cellphone 0972 083 896 or email hoa.hr@scuti.asia
+  Please make sure you understand the job description for the interview.
+
+  * Here is the process of the interview:
+  - Test 15m
+  - Interview by PM (Mr Hoai) and HRM (Mrs Helen)
+  - Interview by our CEO (Mr Tomohide Kakeya) in Japanese, Ms Nga support
+
+  It is highly appreciated if we could receive your confirmation of attendance by replying to this interview schedule within 12 hours.
+  -----------
+  Dear interviewers,
+  Here is information about the candidate:
+  Full name: Phan Xuan Dung
+  Link Jobright: https://admin.jobright.asia/applicant/1926
+  Link Interview: https://docs.google.com/spreadsheets/d/1TC_D67MC6FSt9l26IRcS2-aPZl0H1Uv2FY3CIdmEJ_A/edit#gid=1063343349
+<% end %>
