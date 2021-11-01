@@ -4,7 +4,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :is_ceo?, only: :set_role
 
   def index
-    users = User.select(:id, :name)
+    users = User.select(:id, :name, :role)
     render_all_data_success users, seach_serializer: UserSerializer
   end
 

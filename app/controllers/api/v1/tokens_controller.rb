@@ -19,4 +19,15 @@ class Api::V1::TokensController < Doorkeeper::TokensController
 
     render_success response
   end
+
+  def revoke
+    if token.blank?
+      render json: {}, status: 200
+    elsif authorized?
+      revoke_token
+      render json: {}, status: 200
+    else
+      render json: revocation_error_response, status: :forbidden
+    end
+  end
 end
