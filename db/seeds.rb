@@ -1,11 +1,14 @@
 # Create data table users
+roles = ["hr_department", "manager", "hr_manager", "sale_manager", "project_manager", "general_manager",
+ "technical_manager", "project_leader", "ceo", "customer"]
 User.delete_all
 10.times do |i|
-  User.create!(email: "test_email+#{role.id}@asia.com",
+  User.create!(email: "test_email+#{i}@asia.com",
                name: Faker::Name.name,
                phone_number: "0336896191",
                birthday: Faker::Date.between(from: 40.years.ago, to: 20.years.ago),
-               password: "12345678")
+               password: "12345678",
+               role: roles[i])
 end
 
 # Create data table languages
@@ -108,7 +111,7 @@ contents = ["Evaluate for technical", "Evaluate for skill", "Evaluate for commun
   )
 end
 
-create interviews
+#create interviews
 Interview.delete_all
 levels = Level.all
 levels.each do |level|

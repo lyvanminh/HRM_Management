@@ -11,27 +11,32 @@ class Api::V1::RequestsController < Api::V1::ApiController
 
   def create
     ActiveRecord::Base.transaction do
-      if requestable_type == "Recruitment"
+      if recruitment_params[:requestable_type] == "Recruitment"
         recruitment = Recruitment.create!(recruitment_params)
         request = Request.create!(
-          sender_id: request_params[:sender_id],
+          sender_id: current_user.id,
           requestable_id: recruitment.id,
-          requestable_type: "Recruitment",
+          requestable_type: request_params[:requestable_type],
           number: request_params[:number].to_i,
           type_request: request_params[:type_request].to_i
         )
-      else
-        evaluate = Evaluates.create!(content: "", user_id: evaluate_params[:user_id], candidate_id: evaluate_params[:candidate_id])
-        request = Request.create!(
-          sender_id: request_params[:sender_id],
-          requestable_id: evaluate.id,
-          requestable_type: "Evaluate",
-          number: request_params[:number].to_i,
-          type_request: request_params[:type_request].to_i
-        )
-      end
 
-      render_success request, serializer: RequestSerializer
+        render_success request, serializer: RequestSerializer
+      else
+        requests = []
+        evaluate_params[:user_names].each do |user_name|
+          user = User.find_by(name: user_name)
+          evaluate = Evaluate.create!(content: evaluate_params[:content], user_id: user&.id, candidate_id: evaluate_params[:candidate_id])
+          requests << Request.create!(
+            sender_id: 1,
+            requestable_id: evaluate.id,
+            requestable_type: request_params[:requestable_type],
+            type_request: request_params[:type_request].to_i
+          )
+        end
+
+        render_all_data_success requests, seach_serializer: RequestSerializer
+      end
     end
   end
 
@@ -55,7 +60,7 @@ class Api::V1::RequestsController < Api::V1::ApiController
   private
 
   def request_params
-    params.permit(:sender_id, :number, :type_request)
+    params.permit(:number, :type_request, :requestable_type)
   end
 
   def recruitment_params
@@ -63,7 +68,7 @@ class Api::V1::RequestsController < Api::V1::ApiController
   end
 
   def evaluate_params
-    params.permit(:content, :user_id, :candidate_id)
+    params.permit(:content, :candidate_id, user_names: [])
   end
 
   def find_request

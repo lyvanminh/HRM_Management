@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_31_132328) do
+ActiveRecord::Schema.define(version: 2021_11_01_033236) do
 
   create_table "calendars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "participan_id"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 2021_10_31_132328) do
   create_table "evaluates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "content", null: false
-    t.integer "request_id", null: false
     t.integer "status", default: 0
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
