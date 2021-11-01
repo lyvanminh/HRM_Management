@@ -16,7 +16,7 @@ class Api::V1::Oauth::MeController < Api::V1::ApiController
 
     user.generate_password_token!
 
-    UserMailer.forgot_password(user).deliver
+    UserMailer.forgot_password(user).deliver_now
 
     render_success user, serializer: UserSerializer
   end
