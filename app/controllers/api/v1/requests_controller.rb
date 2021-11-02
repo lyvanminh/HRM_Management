@@ -61,9 +61,9 @@ class Api::V1::RequestsController < Api::V1::ApiController
         )
         candidate.update!(status: params[:status])
 
-        send_email_and_update_status_candidate(@request, evaluate)
+        send_email_notice(@request, candidate)
 
-        after_update_request(@request, evaluate, candidate)
+        after_update_request(@request, candidate)
       end
       render_success @request, serializer: RequestSerializer
     end
@@ -88,21 +88,17 @@ class Api::V1::RequestsController < Api::V1::ApiController
   end
 
   def check_status_update?
-    if Request.statuses[@request.status] > Request.statuses[params[:status]] || Request.statuses[@request.status] + 2 >= Request.statuses[params[:status]]
+    if Request.statuses[@request.status] > Request.statuses[params[:status]]
       raise ArgumentError.new("Can't set status for this request type")
     end
   end
 
-  def send_email_and_update_status_candidate(request, evaluate)
-    candidate = Candidate.find_by!(id: evaluate.candidate_id)
-
+  def send_email_notice(request, candidate)
     case request.type_request
     when "evaluate_cv"
       if request.status == "fail_cv"
-        candidate.update!(status: "fail_cv")
         EvaluateMailer.send_mail_evaluate_cv(candidate, "fail_cv").deliver
       elsif request.status == "approve_cv"
-        candidate.update!(status: "pass_cv")
         EvaluateMailer.send_mail_evaluate_cv(candidate, "pass_cv").deliver
       end
     when "evaluate_test"
@@ -132,11 +128,11 @@ class Api::V1::RequestsController < Api::V1::ApiController
     users = User.where(role: interviewer)
     case request.status
     when "approve_cv"
-      status = "evaluate_test"
+      type_request = "evaluate_test"
     when "pass_test"
-      status = "evaluate_interview"
+      type_request = "evaluate_interview"
     when "pass_interview"
-      status = "evaluate_offer"
+      type_request = "evaluate_offer"
     end
 
     requests = []
@@ -146,8 +142,8 @@ class Api::V1::RequestsController < Api::V1::ApiController
         sender_id: user_hr_department.id,
         requestable_id: evaluate.id,
         requestable_type: "Evaluate",
-        type_request: "none_status",
-        status: status,
+        type_request: type_request,
+        status: "none_status",
       )
     end
   end
