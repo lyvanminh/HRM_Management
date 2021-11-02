@@ -1,5 +1,5 @@
 class CandidateSerializer < ActiveModel::Serializer
-  attributes :id, :user_name, :birth_day, :email, :phone, :address, :chanel_id, :level_id, :language_id, :position_id, :content_cv, :user_refferal_id, :url_cv
+  attributes :id, :user_name, :birth_day, :email, :phone, :address, :chanel_id, :level_id, :language_id, :position_id, :content_cv, :user_refferal_id, :url_cv, :status
 
   belongs_to :chanel
   belongs_to :level

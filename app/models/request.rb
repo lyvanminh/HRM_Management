@@ -6,14 +6,17 @@ class Request < ApplicationRecord
 
   enum type_request: { recruitment_request: 0, evaluate_cv: 1, evaluate_test: 2, evaluate_interview: 3, evaluate_offer: 4 }
   enum status: { wait_recruitment: 0, reject_recruitment: 1, approve_recruitment: 2, wait_approve_cv: 3, fail_cv: 4, approve_cv: 5,
-                 fail_test: 6, pass_test: 7, fail_interview: 8, pass_interview: 9, fail_offer: 10, pass_offer: 11}
+                 fail_test: 6, pass_test: 7, fail_interview: 8, pass_interview: 9, fail_offer: 10, pass_offer: 11, none_status: 12}
 
   before_update :check_status, on: :update
 
   class << self
-    def get_recruitment_request
-      sql = "INNER JOIN recruitments ON recruitments.id = requests.requestable_id"
-      Request.includes(:user).joins(sql).select("requests.*, recruitments.*")
+    def get_request
+      Request.includes(:user).all
+    end
+
+    def get_request_with_type(type_request)
+      Request.includes(:user).where(type_request: type_request)
     end
   end
 
