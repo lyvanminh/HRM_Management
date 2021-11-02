@@ -10,8 +10,8 @@ class Candidate < ApplicationRecord
 
   mount_uploader :content_cv, CvUploader
 
-  enum status: {wait_approve: 0, fail_cv: 0, pass_cv: 1, fail_test: 2, pass_test: 3, fail_interview: 4, pass_interview: 5,
-                fail_offer: 6, pass_offer: 7}
+  enum status: {wait_approve: 0, fail_cv: 1, approve_cv: 2, fail_test: 3, pass_test: 4, fail_interview: 5, pass_interview: 6,
+                fail_offer: 7, pass_offer: 8}
 
   class << self
     def get_all
